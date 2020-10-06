@@ -28,7 +28,7 @@ function uploadSaleRange() {
     var RECEIPT_UUID_INDEX = 16;
     var UPDATED_AT_INDEX = 17;
     // File base and name
-    var FILE_BASE_NAME = SpreadsheetApp.getActiveSpreadsheet().getName() + " " + sheet;
+    var FILE_BASE_NAME = SpreadsheetApp.getActiveSpreadsheet().getName();
     var FILE_NAME =  FILE_BASE_NAME + ", VENTES: "+ START_LINE +": " + END_LINE;
     
     // Get sale lines
