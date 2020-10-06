@@ -27,12 +27,9 @@ function uploadSaleRange() {
     var CUSTOMER_ID_INDEX = 15;
     var RECEIPT_UUID_INDEX = 16;
     var UPDATED_AT_INDEX = 17;
-    var USER_ID = 7;
     // File base and name
     var FILE_BASE_NAME = SpreadsheetApp.getActiveSpreadsheet().getName() + " " + sheet;
     var FILE_NAME =  FILE_BASE_NAME + ", VENTES: "+ START_LINE +": " + END_LINE;
-    // API endpoint
-    var API_ENDPOINT = API_SALE_ENDPOINT;
     
     // Get sale lines
     var sales = getSaleRange(START_LINE, END_LINE);
@@ -44,8 +41,10 @@ function uploadSaleRange() {
     // Submit receipts for/to SEMA
     // saveToDrive(FILE_NAME, receipts);
     submitToSema(API_SALE_ENDPOINT, receipts, sheet, RECEIPT_UUID_INDEX, UPDATED_AT_INDEX);  
-    
-    function createReceiptFromSale(sale) {
+  }
+  
+  
+  function createReceiptFromSale(sale) {
       return {
         created_at: sale.date,
         customer_id: sale.customerId,
@@ -75,7 +74,6 @@ function uploadSaleRange() {
       };
     }
     
-    
     // sema sales export
     function getSaleRange(START_LINE, END_LINE){
       // Row count
@@ -103,7 +101,6 @@ function uploadSaleRange() {
       return result;
     }
     
-    
     function getSaleDataLine(row)
     {
       var saleLine = {
@@ -124,5 +121,4 @@ function uploadSaleRange() {
       // returned valid line or null
       return (validLine ? saleLine : null);
     };
-  }
 }

@@ -23,7 +23,6 @@ function uploadSortiesRange() {
   var EXPENSE_UUID_INDEX = 7;
   var UPDATED_AT_INDEX = 8;
   
-  var API_ENDPOINT = "https://api.haiti.semawater.mooo.com" + '/sema/site/expenses/bulk'
   var FILE_BASE_NAME = SpreadsheetApp.getActiveSpreadsheet().getName() + " " + sheet;
   var FILE_NAME =  FILE_BASE_NAME + ", SORTIES: " + START_LINE +": " + END_LINE;
   
