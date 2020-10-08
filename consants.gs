@@ -2,9 +2,11 @@
 // API base url
 var API_BASE_URL = "http://162.243.83.79:81";
 // Sale endpoint
-var API_SALE_ENDPOINT = '/sema/site/receipts/bulk';
+var API_POST_SALE_ENDPOINT = '/sema/site/receipts/bulk';
+var API_GET_SALE_ENDPOINT = '/sema/site/receipts';
 // Expense endpoint
-var API_EXPENSE_ENDPOINT = '/sema/site/expenses/bulk';
+var API_POST_EXPENSE_ENDPOINT = '/sema/site/expenses/bulk';
+var API_GET_EXPENSE_ENDPOINT = '/sema/site/expenses';
 
 var USER_ID = 7;
 
