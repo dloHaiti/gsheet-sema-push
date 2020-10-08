@@ -20,7 +20,7 @@
         {
           sku: line.sku,
           quantity: line.quantity,
-          price_total: linne.total,
+          price_total: line.total,
           currency_code: "HTG",
           receipt_id: line.receipt_id
         }

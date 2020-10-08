@@ -11,7 +11,7 @@ function uploadSaleRange() {
     var receipts = data.map((sale) => _createReceiptFromVentes(sale));
     // Upload receipts to sema
     var result = _fetch("POST", API_SALE_ENDPOINT, receipts);
-    // Log uuid of each receipt on success
+  // TODO: Test Log uuid of each receipt on success
     data.forEach(function(receipt, index){
         data[index]['receiptUuid'] = receipt.uuid;
         data[index]['receiptUuid'] = receipt.updated_at; 

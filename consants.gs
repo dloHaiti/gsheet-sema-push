@@ -6,6 +6,11 @@ var ui = SpreadsheetApp.getUi();
 // Use the `LOG` sheet for code output log
 var logSheet = SpreadsheetApp.getActive().getSheetByName('LOG');
 
+
+var USER_ID = 7;
+
+var KIOSK_ID = 1;
+
 // KIOSK To ID
 var KIOSK_IDS_MAP = {
     "saintard": 1,
