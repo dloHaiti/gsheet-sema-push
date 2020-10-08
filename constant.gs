@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 // kiosk id on sema database
 var KIOSK_ID = null; 
 var USER_ID = 7;
@@ -32,3 +33,7 @@ var _defaultProporties = {
   "sale_line.between": [0, 0],
   "sorties_line.between": [0, 0]
 };
+=======
+  var KIOSK_ID = null; // Saintard
+  var USER_ID = 7;
+>>>>>>> 6cc9189d81b7a01046451b2d66223f37bc310579

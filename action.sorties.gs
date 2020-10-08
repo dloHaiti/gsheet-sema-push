@@ -2,6 +2,7 @@
 function uploadSortiesRange() {
   
   // Request line range
+<<<<<<< HEAD
   var INPUT = _prompt("What range, lines, to upload?", "Fomat: [START_LINE, END_LINE]").split(",");
 
   if(INPUT[0] && INPUT[1]){
@@ -53,6 +54,47 @@ function uploadSortiesRange() {
   function createExpenseFromSorties(sortie) {
     return {
       created_at: sortie.date,
+=======
+  var INPUT = _prompt("What range, lines, to upload?", "Fomat: [START_LINE, END_LINE]");
+  
+  var START_LINE = INPUT[0];
+  var END_LINE = INPUT[1];
+  
+  _toast("START_LINE: " + START_LINE);
+  _toast("END_LINE: " + END_LINE);
+  
+  var sheet = SpreadsheetApp.getActive().getSheetByName('SORTIES');
+  
+  // Date (1) | Description/Note (2) | Total (3) | Notes (4) | Expense_id (6) | Uuid (7)
+  
+  var SCRIPT = "SORTIES";
+  var DATE_INDEX = 1;
+  var DESCRIPTION_INDEX = 2;
+  var TOTAL_INDEX = 3;
+  var NOTE_INDEX = 4;
+  var EXPENSE_ID_INDEX = 6;
+  var EXPENSE_UUID_INDEX = 7;
+  var UPDATED_AT_INDEX = 8;
+  
+  var FILE_BASE_NAME = SpreadsheetApp.getActiveSpreadsheet().getName() + " " + sheet;
+  var FILE_NAME =  FILE_BASE_NAME + ", SORTIES: " + START_LINE +": " + END_LINE;
+  
+  // Get Soties lines range 
+  var sorties = getSortieRange(START_LINE, END_LINE);
+  // Get Sorties to Expenses (spported by sema)
+  var expenses = sorties.map(function(sortie){
+    return createExpenseFromSorties(sortie);
+  });
+  // Save in expenses format
+  // saveToDrive(FILE_NAME, expenses);
+  // submitToSema(API_ENDPOINT, expenses, sheet, EXPENSE_UUID_INDEX, UPDATED_AT_INDEX);
+  _log(JSON.parse(expenses));
+  
+  
+  function createExpenseFromSorties(sortie) {
+    return {
+      created_t: sortie.date,
+>>>>>>> 6cc9189d81b7a01046451b2d66223f37bc310579
       notes: sortie.notes,
       total: sortie.total,
       expense_account_id: sortie.expenseId,
@@ -62,8 +104,14 @@ function uploadSortiesRange() {
       lineNumber: sortie.lineNumber
     };
   }
+<<<<<<< HEAD
 
   // Get line interval into json array
+=======
+  
+  
+  // sema sales export
+>>>>>>> 6cc9189d81b7a01046451b2d66223f37bc310579
   function getSortieRange(START_LINE, END_LINE){
     // Row count
     var lineCount = END_LINE - START_LINE;
@@ -83,14 +131,23 @@ function uploadSortiesRange() {
     }
     return result;
   }
+<<<<<<< HEAD
  
   // Get a row to JSON format
+=======
+  
+  
+>>>>>>> 6cc9189d81b7a01046451b2d66223f37bc310579
   function getSortieDataLine(row)
   {
     var sortieLine = {
       date: row[DATE_INDEX-1],   // sheet.getRange(lineNumber, DATE_INDEX).getValues()[0][0],
+<<<<<<< HEAD
       description: row[DESCRIPTION_INDEX - 1],   //sheet.getRange(lineNumber, DESCRIPTION_INDEX).getValues()[0][0]
       notes: row[NOTE_INDEX - 1], //sheet.getRange(lineNumber, NOTE_INDEX).getValues()[0][0]
+=======
+      notes: row[DESCRIPTION_INDEX - 1],   //sheet.getRange(lineNumber, DESCRIPTION_INDEX).getValues()[0][0] + ": " + sheet.getRange(lineNumber, NOTE_INDEX).getValues()[0][0],
+>>>>>>> 6cc9189d81b7a01046451b2d66223f37bc310579
       expenseId: row[EXPENSE_ID_INDEX - 1], //sheet.getRange(lineNumber, EXPENSE_ID_INDEX).getValues()[0][0],
       expenseUuid: row[EXPENSE_UUID_INDEX - 1], // sheet.getRange(lineNumber, EXPENSE_UUID_INDEX).getValues()[0][0],
       total: row[TOTAL_INDEX - 1], // sheet.getRange(lineNumber, TOTAL_INDEX).getValues()[0][0],

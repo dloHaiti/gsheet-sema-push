@@ -37,6 +37,7 @@ function uploadSaleRange() {
     var receipts = sales.map(function(sale){
       return createReceiptFromSale(sale);
     });
+<<<<<<< HEAD
     // Submit receipts for/to SEMA
     var data = _fetch("POST", API_SALE_ENDPOINT, receipts);
     // Log uuid and update_at in sheet.
@@ -49,6 +50,15 @@ function uploadSaleRange() {
   }
   
   // Create a receipt  for sema from line data
+=======
+    
+    // Submit receipts for/to SEMA
+    // saveToDrive(FILE_NAME, receipts);
+    submitToSema(API_SALE_ENDPOINT, receipts, sheet, RECEIPT_UUID_INDEX, UPDATED_AT_INDEX);  
+  }
+  
+  
+>>>>>>> 6cc9189d81b7a01046451b2d66223f37bc310579
   function createReceiptFromSale(sale) {
       return {
         created_at: sale.date,
@@ -77,10 +87,17 @@ function uploadSaleRange() {
         uuid: sale.receiptUuid,
         lineNumber: sale.lineNumber
       };
+<<<<<<< HEAD
   };
   
   // Get line interval into json array
   function getSaleRange(START_LINE, END_LINE){
+=======
+    }
+    
+    // sema sales export
+    function getSaleRange(START_LINE, END_LINE){
+>>>>>>> 6cc9189d81b7a01046451b2d66223f37bc310579
       // Row count
       var lineCount = END_LINE - START_LINE;
       // Get working range as array
@@ -104,10 +121,16 @@ function uploadSaleRange() {
         _log(log);
       }
       return result;
+<<<<<<< HEAD
   };
 
   // Get a row to JSON format
   function getSaleDataLine(row)
+=======
+    }
+    
+    function getSaleDataLine(row)
+>>>>>>> 6cc9189d81b7a01046451b2d66223f37bc310579
     {
       var saleLine = {
         date: row[DATE_INDEX - 1],
@@ -126,5 +149,9 @@ function uploadSaleRange() {
       var validLine = (saleLine.customerName && saleLine.customerName.length) || (saleLine.quantity && saleLine.total) || (saleLine.receiptId && saleLine.receiptId.length);
       // returned valid line or null
       return (validLine ? saleLine : null);
+<<<<<<< HEAD
   };
+=======
+    };
+>>>>>>> 6cc9189d81b7a01046451b2d66223f37bc310579
 }
