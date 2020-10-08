@@ -3,7 +3,7 @@
    function _createReceiptFromVentes(line) {
     return {
       created_at: line.date,
-      customer_id: line.customerId,
+      customer_id: line.customer_id,
       amount_cash: line.cash,
       amount_mobile: 0,
       amount_loan: line.credit,
@@ -21,28 +21,24 @@
           quantity: line.quantity,
           price_total: linne.total,
           currency_code: "HTG",
-          receipt_id: line.receiptId
+          receipt_id: line.receipt_id
         }
       ],
       user_id: USER_ID,
-      uuid: line.receiptUuid,
-      // TODO:
-      lineNumber: line.lineNumber
+      uuid: line.receipt_id,
     };
   }
 
 
   function _createExpenseFromSorties(line) {
     return {
-      createdAt: line.date,
+      created_at: line.date,
       notes: line.notes,
       total: line.total,
-      expenseAccountId: line.expenseId,
-      kioskId: KIOSK_ID,
-      userId: USER_ID,
-      uuid: line.expenseUuid,
-      // TODO:
-      lineNumber: line.lineNumber
+      expense_account_id: line.expense_account_id,
+      kiosk_id: KIOSK_ID,
+      user_id: USER_ID,
+      uuid: line.expense_uuid,
     };
   }
 
