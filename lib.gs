@@ -26,21 +26,23 @@
       ],
       user_id: USER_ID,
       uuid: line.receiptUuid,
+      // TODO:
       lineNumber: line.lineNumber
     };
   }
 
 
-  function _createExpenseFromSorties(sortie) {
+  function _createExpenseFromSorties(line) {
     return {
-      createdAt: sortie.date,
-      notes: sortie.notes,
-      total: sortie.total,
-      expenseAccountId: sortie.expenseId,
+      createdAt: line.date,
+      notes: line.notes,
+      total: line.total,
+      expenseAccountId: line.expenseId,
       kioskId: KIOSK_ID,
       userId: USER_ID,
-      uuid: sortie.expenseUuid,
-      lineNumber: sortie.lineNumber
+      uuid: line.expenseUuid,
+      // TODO:
+      lineNumber: line.lineNumber
     };
   }
 
