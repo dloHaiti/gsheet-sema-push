@@ -62,8 +62,14 @@ function uploadSortiesRange() {
       lineNumber: sortie.lineNumber
     };
   }
+<<<<<<< HEAD
 
   // Get line interval into json array
+=======
+  
+  
+  // sema sales export
+>>>>>>> 6cc9189d81b7a01046451b2d66223f37bc310579
   function getSortieRange(START_LINE, END_LINE){
     // Row count
     var lineCount = END_LINE - START_LINE;
@@ -83,14 +89,23 @@ function uploadSortiesRange() {
     }
     return result;
   }
+<<<<<<< HEAD
  
   // Get a row to JSON format
+=======
+  
+  
+>>>>>>> 6cc9189d81b7a01046451b2d66223f37bc310579
   function getSortieDataLine(row)
   {
     var sortieLine = {
       date: row[DATE_INDEX-1],   // sheet.getRange(lineNumber, DATE_INDEX).getValues()[0][0],
+<<<<<<< HEAD
       description: row[DESCRIPTION_INDEX - 1],   //sheet.getRange(lineNumber, DESCRIPTION_INDEX).getValues()[0][0]
       notes: row[NOTE_INDEX - 1], //sheet.getRange(lineNumber, NOTE_INDEX).getValues()[0][0]
+=======
+      notes: row[DESCRIPTION_INDEX - 1],   //sheet.getRange(lineNumber, DESCRIPTION_INDEX).getValues()[0][0] + ": " + sheet.getRange(lineNumber, NOTE_INDEX).getValues()[0][0],
+>>>>>>> 6cc9189d81b7a01046451b2d66223f37bc310579
       expenseId: row[EXPENSE_ID_INDEX - 1], //sheet.getRange(lineNumber, EXPENSE_ID_INDEX).getValues()[0][0],
       expenseUuid: row[EXPENSE_UUID_INDEX - 1], // sheet.getRange(lineNumber, EXPENSE_UUID_INDEX).getValues()[0][0],
       total: row[TOTAL_INDEX - 1], // sheet.getRange(lineNumber, TOTAL_INDEX).getValues()[0][0],

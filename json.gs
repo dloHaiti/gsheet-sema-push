@@ -3,16 +3,13 @@
 
 var COLUMN_MAX = 26;
 
-// var range = sheet.getRange(START_LINE, 1, lineCount, 26).getValues();
-
-
 var spreadsheetToJson = function(options){
     var {
         sheetName,
         rowBetween = [0, 0],
         columnMax = COLUMN_MAX
     } = options;
-    
+
     // Our working sheet
     var sheet = SpreadsheetApp.getActive().getSheetByName(sheetName);
     // Header for our json
