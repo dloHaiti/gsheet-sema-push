@@ -21,34 +21,17 @@ function updateExpenseFromSema() {
   // normalize expenses to expense line
   expenses = expenses.map(function(expense, ind, arr){
     return [
-      // 1. kiosk 
-      expense.kiosk.name,
-      // 2. date
-      new Date(expense.created_at),
-      // 3. no account id
-      " ",
-      // 4. amount
-      parseInt(expense.total, 10),
-      // 5. description/note
-      expense.note || "", 
-      // 6. sub-category
-      expense.expense_account.category,
-      // 7. category
-      expense.expense_account.name
+      expense.kiosk.name, new Date(expense.created_at),  " ", parseInt(expense.total, 10), expense.note || "", expense.expense_account.category, expense.expense_account.name
     ];
   });
   // Add header to expenses
   expenses.unshift([
-    "Kiosk",
-    "Date",
-    "Account #",
-    "Total",
-    "Description",
-    "Category",
-    "Sub Category"
+    "Kiosk", "Date", "Account #", "Total", "Description", "Category", "Sub Category"
   ]);
-  // Get range for updated expenses; getRange(LINE, COLUMN)
-  var range = sheet.getRange(1, 1, expenses.length, (expenses[0]).length);
-  // update range
-  range.setValues(expenses);
+  // Update expenses in Expenses sheet
+  jsonToSpreadsheet({
+    sheetName: "Test",
+    data: expenses
+  });
+  
 }
