@@ -1,11 +1,10 @@
 
-// Sheet
-var ss = SpreadsheetApp.getActiveSpreadsheet();
-// UI
-var ui = SpreadsheetApp.getUi(); 
-// Use the `LOG` sheet for code output log
-var logSheet = SpreadsheetApp.getActive().getSheetByName('LOG');
-
+// API base url
+var API_BASE_URL = "http://162.243.83.79:81";
+// Sale endpoint
+var API_SALE_ENDPOINT = '/sema/site/receipts/bulk';
+// Expense endpoint
+var API_EXPENSE_ENDPOINT = '/sema/site/expenses/bulk';
 
 var USER_ID = 7;
 
@@ -22,6 +21,8 @@ var KIOSK_IDS_MAP = {
     "limonade": 8,
     "ouanaminthe": 9
   };
+
+
 // Default user properties: list of kiosks to pull data for and for between what date.
 var DEFAULT_PROPERTIES = {
     "kiosk_id.or" : Object.keys(KIOSK_IDS_MAP),
@@ -29,9 +30,11 @@ var DEFAULT_PROPERTIES = {
     "sale_line.between": [0, 0],
     "sorties_line.between": [0, 0]
 };
-// API base url
-var API_BASE_URL = "https://api.haiti.semawater.mooo.com";
-// Sale endpoint
-var API_SALE_ENDPOINT = '/sema/site/receipts/bulk';
-// Expense endpoint
-var API_EXPENSE_ENDPOINT = '/sema/site/expenses/bulk';
+
+
+// Sheet
+var ss = SpreadsheetApp.getActiveSpreadsheet();
+// UI
+var ui = SpreadsheetApp.getUi(); 
+// Use the `LOG` sheet for code output log
+var logSheet = SpreadsheetApp.getActive().getSheetByName('LOG');

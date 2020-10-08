@@ -1,17 +1,4 @@
 
-function uploadSaleRange() {
-    // Request line range
-    var betweenLine = _prompt("What range, or lines, to upload?", "Fomat: [START_LINE, END_LINE]").split(",");
-    // sales data
-    var data = spreadsheetToJson({
-      sheetName: "VENTES",
-      rowBetween: [parseInt(betweenLine[0], 10), parseInt(betweenLine[1], 10)]
-    });
-  
-    console.log(data);
-  }
-  
-
   function uploadSaleRange() {
     try {
       // Request line range
@@ -26,17 +13,19 @@ function uploadSaleRange() {
       var receipts = data.map((sale) => _createReceiptFromVentes(sale))
       // filter empty sale lines.
         .filter((receipt) => {
-          return (receipt.customer_id && saleLine.customer_id.length) || (receipt.quantity && receipt.total) || (receipt.receipt_uuid && receipt.receipt_uuid.length);
+          return (receipt.customer_id && receipt.customer_id.length) || (receipt.quantity && receipt.total) || (receipt.receipt_uuid && receipt.receipt_uuid.length);
         });
       // Upload receipts to sema
       var result = _fetch("POST", API_SALE_ENDPOINT, receipts);
       // TODO: Test Log uuid of each receipt on success
-      data.forEach(function(receipt, index){
-        data[index]['receiptUuid'] = receipt.uuid;
-        data[index]['receiptUuid'] = receipt.updated_at; 
+      result.forEach(function(receipt, index){
+        data[betweenLine[0] + index]['receipt_uuid'] = receipt.uuid;
+        data[betweenLine[0] + index]['updated_at'] = receipt.updated_at; 
       });
+    console.log(data);
     } catch(err){
-      console.log(err);
+      _log(err.message);
+      _toast(err.message);
     }
     }
     

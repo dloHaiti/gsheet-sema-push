@@ -5,29 +5,29 @@
 
     receipt.created_at = line.date
     receipt.customer_id = line.customer_id;
-    receipt.amount_cash = line.cash;
+    receipt.amount_cash = parseInt(line.credit, 10) || 0;
     receipt.amount_mobile = 0;
-    receipt.amount_loan = line.credit;
+    receipt.amount_loan = parseInt(line.credit, 10) || 0;
     receipt.amount_card = 0;
     receipt.sponsor_amount = 0;
     receipt.currency_code = "HTG";
     receipt.payment_type = "Cash";
-    receipt.total = line.total;
+    receipt.total = parseInt(line.total, 10) || 0;
     receipt.sponsor_id = null;
     receipt.is_sponsor_selected = false;
     receipt.delivery_id  = null;
     receipt.receipt_line_items = [
         {
           sku: line.sku,
-          quantity: line.quantity,
-          price_total: line.total,
+          quantity: parseInt(line.quantity, 10) || 0,
+          price_total: parseInt(line.total, 10) || 0,
           currency_code: "HTG",
           receipt_id: line.receipt_id
         }
       ];
     receipt.user_id = USER_ID;
     receipt.uuid = line.receipt_uuid;
-    receipt.line_number = line.line_number;
+    receipt.line_number = parseInt(line.line_number, 10) || 0;
 
     return receipt;
   }
@@ -89,7 +89,7 @@
     // TODO: Add payload to endpoint for GET request.
     
     // url
-    url = API_BASE_URL + endpoint;
+    var url = API_BASE_URL + endpoint;
     // Define request parameters
     var options = {
       "sync": true,
