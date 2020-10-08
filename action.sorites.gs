@@ -17,7 +17,7 @@ function uploadSortiesRange() {
 
 // Update expenses
 function updateExpenseFromSema() {
-  var expenses = _fetch('GET', API_EXPENSE_ENDPOINT, null);
+  var expenses = _fetch('GET', API_GET_EXPENSE_ENDPOINT, null);
   // normalize expenses to expense line
   expenses = expenses.map(function(expense, ind, arr){
     return [

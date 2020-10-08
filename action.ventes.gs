@@ -16,7 +16,7 @@
           return (receipt.customer_id && receipt.customer_id.length) || (receipt.quantity && receipt.total) || (receipt.receipt_uuid && receipt.receipt_uuid.length);
         });
       // Upload receipts to sema
-      var result = _fetch("POST", API_SALE_ENDPOINT, receipts);
+      var result = _fetch("POST", API_POST_SALE_ENDPOINT, receipts);
       // TODO: Test Log uuid of each receipt on success
       result.forEach(function(receipt, index){
         data[betweenLine[0] + index]['receipt_uuid'] = receipt.uuid;
@@ -42,7 +42,7 @@
   
 //   try {
 //     // Get receipts from sema
-//     var receipts = _fetch('get', API_SALE_ENDPOINT, properties);
+//     var receipts = _fetch('GET', API_GET_SALE_ENDPOINT, properties);
 //     // clear sale sheet
 //     sheet.clear();
 //     // normalize from receipts to sale lines
