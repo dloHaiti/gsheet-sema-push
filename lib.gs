@@ -26,7 +26,8 @@
         }
       ];
     receipt.user_id = USER_ID;
-    receipt.uuid = line.receipt_id;
+    receipt.uuid = line.receipt_uuid;
+    receipt.line_number = line.line_number;
 
     return receipt;
   }
@@ -42,6 +43,7 @@
     expense.kiosk_id= KIOSK_ID;
     expense.user_id= USER_ID;
     expense.uuid= line.expense_uuid;
+    expense.line_number = line.line_number;
 
     return expense;
   }
