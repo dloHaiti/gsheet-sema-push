@@ -11,7 +11,7 @@ var spreadsheetToJson = function(options){
     // Our working sheet
     var sheet = SpreadsheetApp.getActive().getSheetByName(sheetName);
     // Header for our json
-    var header = sheet.getRange(1, 1, 1, columnMax).getValues();
+    var header = sheet.getRange(1, 1, 1, columnMax).getValues()[0];
     // Data to output in json
     var data = sheet.getRange(rowBetween[0], 1, rowBetween[1]-rowBetween[0], columnMax).getValues();
     // our json result

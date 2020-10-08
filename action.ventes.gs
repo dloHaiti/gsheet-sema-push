@@ -5,7 +5,7 @@ function uploadSaleRange() {
     // sales data
     var data = spreadsheetToJson({
       sheetName: "VENTES",
-      rowBetween: betweenLine
+      rowBetween: [parseInt(betweenLine[0], 10), parseInt(betweenLine[1], 10)]
     });
   
     console.log(data);
