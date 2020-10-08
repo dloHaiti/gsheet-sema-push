@@ -2,7 +2,6 @@
 function uploadSortiesRange() {
   
   // Request line range
-<<<<<<< HEAD
   var INPUT = _prompt("What range, lines, to upload?", "Fomat: [START_LINE, END_LINE]").split(",");
 
   if(INPUT[0] && INPUT[1]){
@@ -54,47 +53,6 @@ function uploadSortiesRange() {
   function createExpenseFromSorties(sortie) {
     return {
       created_at: sortie.date,
-=======
-  var INPUT = _prompt("What range, lines, to upload?", "Fomat: [START_LINE, END_LINE]");
-  
-  var START_LINE = INPUT[0];
-  var END_LINE = INPUT[1];
-  
-  _toast("START_LINE: " + START_LINE);
-  _toast("END_LINE: " + END_LINE);
-  
-  var sheet = SpreadsheetApp.getActive().getSheetByName('SORTIES');
-  
-  // Date (1) | Description/Note (2) | Total (3) | Notes (4) | Expense_id (6) | Uuid (7)
-  
-  var SCRIPT = "SORTIES";
-  var DATE_INDEX = 1;
-  var DESCRIPTION_INDEX = 2;
-  var TOTAL_INDEX = 3;
-  var NOTE_INDEX = 4;
-  var EXPENSE_ID_INDEX = 6;
-  var EXPENSE_UUID_INDEX = 7;
-  var UPDATED_AT_INDEX = 8;
-  
-  var FILE_BASE_NAME = SpreadsheetApp.getActiveSpreadsheet().getName() + " " + sheet;
-  var FILE_NAME =  FILE_BASE_NAME + ", SORTIES: " + START_LINE +": " + END_LINE;
-  
-  // Get Soties lines range 
-  var sorties = getSortieRange(START_LINE, END_LINE);
-  // Get Sorties to Expenses (spported by sema)
-  var expenses = sorties.map(function(sortie){
-    return createExpenseFromSorties(sortie);
-  });
-  // Save in expenses format
-  // saveToDrive(FILE_NAME, expenses);
-  // submitToSema(API_ENDPOINT, expenses, sheet, EXPENSE_UUID_INDEX, UPDATED_AT_INDEX);
-  _log(JSON.parse(expenses));
-  
-  
-  function createExpenseFromSorties(sortie) {
-    return {
-      created_t: sortie.date,
->>>>>>> 6cc9189d81b7a01046451b2d66223f37bc310579
       notes: sortie.notes,
       total: sortie.total,
       expense_account_id: sortie.expenseId,
