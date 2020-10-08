@@ -1,4 +1,49 @@
-    
+  
+
+   function _createReceiptFromVentes(line) {
+    return {
+      created_at: line.date,
+      customer_id: line.customerId,
+      amount_cash: line.cash,
+      amount_mobile: 0,
+      amount_loan: line.credit,
+      amount_card: 0,
+      sponsor_amount: 0,
+      currency_code: "HTG",
+      payment_type: "Cash",
+      total: line.total,
+      sponsor_id: null,
+      is_sponsor_selected: false,
+      delivery_id : null,
+      receipt_line_items: [
+        {
+          sku: line.sku,
+          quantity: line.quantity,
+          price_total: linne.total,
+          currency_code: "HTG",
+          receipt_id: line.receiptId
+        }
+      ],
+      user_id: USER_ID,
+      uuid: line.receiptUuid,
+      lineNumber: line.lineNumber
+    };
+  }
+
+
+  function _createExpenseFromSorties(sortie) {
+    return {
+      createdAt: sortie.date,
+      notes: sortie.notes,
+      total: sortie.total,
+      expenseAccountId: sortie.expenseId,
+      kioskId: KIOSK_ID,
+      userId: USER_ID,
+      uuid: sortie.expenseUuid,
+      lineNumber: sortie.lineNumber
+    };
+  }
+
   function saveToDrive(filename, data){
     data = JSON.stringify(data);
     DriveApp.createFile( filename + ": " + (new Date()).toString() + '.json', data);
@@ -68,3 +113,4 @@
     properties = Object.assign({}, DEFAULT_PROPERTIES, properties);
     PropertiesService.getUserProperties().setProperty('properties', JSON.stringify(properties));
   };
+
