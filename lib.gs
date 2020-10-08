@@ -1,21 +1,22 @@
   
 
    function _createReceiptFromVentes(line) {
-    return {
-      created_at: line.date,
-      customer_id: line.customer_id,
-      amount_cash: line.cash,
-      amount_mobile: 0,
-      amount_loan: line.credit,
-      amount_card: 0,
-      sponsor_amount: 0,
-      currency_code: "HTG",
-      payment_type: "Cash",
-      total: line.total,
-      sponsor_id: null,
-      is_sponsor_selected: false,
-      delivery_id : null,
-      receipt_line_items: [
+    var receipt = {};
+
+    receipt.created_at = line.date
+    receipt.customer_id = line.customer_id;
+    receipt.amount_cash = line.cash;
+    receipt.amount_mobile = 0;
+    receipt.amount_loan = line.credit;
+    receipt.amount_card = 0;
+    receipt.sponsor_amount = 0;
+    receipt.currency_code = "HTG";
+    receipt.payment_type = "Cash";
+    receipt.total = line.total;
+    receipt.sponsor_id = null;
+    receipt.is_sponsor_selected = false;
+    receipt.delivery_id  = null;
+    receipt.receipt_line_items = [
         {
           sku: line.sku,
           quantity: line.quantity,
@@ -23,23 +24,26 @@
           currency_code: "HTG",
           receipt_id: line.receipt_id
         }
-      ],
-      user_id: USER_ID,
-      uuid: line.receipt_id,
-    };
+      ];
+    receipt.user_id = USER_ID;
+    receipt.uuid = line.receipt_id;
+
+    return receipt;
   }
 
 
   function _createExpenseFromSorties(line) {
-    return {
-      created_at: line.date,
-      notes: line.notes,
-      total: line.total,
-      expense_account_id: line.expense_account_id,
-      kiosk_id: KIOSK_ID,
-      user_id: USER_ID,
-      uuid: line.expense_uuid,
-    };
+    var expense = {};
+
+    expense.created_at= line.date;
+    expense.notes= line.notes;
+    expense.total= line.total;
+    expense.expense_account_id= line.expense_account_id;
+    expense.kiosk_id= KIOSK_ID;
+    expense.user_id= USER_ID;
+    expense.uuid= line.expense_uuid;
+
+    return expense;
   }
 
   function saveToDrive(filename, data){
