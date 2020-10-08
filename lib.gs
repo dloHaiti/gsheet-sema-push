@@ -5,7 +5,7 @@
 
     receipt.created_at = line.date
     receipt.customer_id = line.customer_id;
-    receipt.amount_cash = parseInt(line.credit, 10) || 0;
+    receipt.amount_cash = parseInt(line.cash, 10) || 0;
     receipt.amount_mobile = 0;
     receipt.amount_loan = parseInt(line.credit, 10) || 0;
     receipt.amount_card = 0;
@@ -18,7 +18,7 @@
     receipt.delivery_id  = null;
     receipt.receipt_line_items = [
         {
-          sku: line.sku,
+          sku: (line.sku === "DLM5") ? "EB5G" : line.sku,
           quantity: parseInt(line.quantity, 10) || 0,
           price_total: parseInt(line.total, 10) || 0,
           currency_code: "HTG",
@@ -43,7 +43,7 @@
     expense.kiosk_id= KIOSK_ID;
     expense.user_id= USER_ID;
     expense.uuid= line.expense_uuid;
-    expense.line_number = line.line_number;
+    // expense.line_number = line.line_number;
 
     return expense;
   }

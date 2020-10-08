@@ -2,7 +2,7 @@
   function uploadSaleRange() {
     try {
       // Request line range
-      var betweenLine = [2105, 2108];
+      var betweenLine = [1951, 2108];
       // var betweenLine = _prompt("What range, or lines, to upload?", "Fomat: [START_LINE, END_LINE]").split(",");
       // sales data
       var data = spreadsheetToJson({
@@ -19,8 +19,20 @@
       var result = _fetch("POST", API_POST_SALE_ENDPOINT, receipts);
       // TODO: Test Log uuid of each receipt on success
       result.forEach(function(receipt, index){
-        data[betweenLine[0] + index]['receipt_uuid'] = receipt.uuid;
-        data[betweenLine[0] + index]['updated_at'] = receipt.updated_at; 
+        // update uuid
+        updatePosition({
+          sheetName: "VENTES",
+          data: receipt.uuid,
+          x: receipts[index].line_number,
+          y: 16
+        });
+        // update updated_at
+        updatePosition({
+          sheetName: "VENTES",
+          data: receipt.updated_at,
+          x: receipts[index].line_number,
+          y: 17
+        });
       });
     console.log(data);
     } catch(err){

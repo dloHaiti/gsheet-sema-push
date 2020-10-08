@@ -45,3 +45,14 @@ var jsonToSpreadsheet = function(options){
     // update range
     range.setValues(data);
 }
+
+var updatePosition = function(options){
+  var {
+    sheetName,
+      data,
+      x,
+      y
+  } = options;
+  var sheet = SpreadsheetApp.getActive().getSheetByName(sheetName);
+  return sheet.getRange(x, y).setValue(data);
+}
