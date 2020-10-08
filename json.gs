@@ -1,6 +1,4 @@
 
-
-
 var COLUMN_MAX = 26;
 
 var spreadsheetToJson = function(options){
