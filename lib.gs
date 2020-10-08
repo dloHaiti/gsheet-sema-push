@@ -1,34 +1,3 @@
-
-// KIOSK To ID
-var KIOSK_IDS_MAP = {
-    "saintard": 1,
-    "corail": 2,
-    "cabaret": 4,
-    "santo19": 5,
-    "bois9": 6,
-    "quartier morin": 7,
-    "limonade": 8,
-    "ouanaminthe": 9
-  };
-  // Sheet
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  // UI
-  var ui = SpreadsheetApp.getUi(); 
-  // API base url
-  var API_BASE_URL = "https://api.haiti.semawater.mooo.com";
-  // Sale endpoint
-  var API_SALE_ENDPOINT = '/sema/site/receipts/bulk';
-  // Expense endpoint
-  var API_EXPENSE_ENDPOINT = '/sema/site/expenses/bulk';
-  // Use the `LOG` sheet for code output log
-  var logSheet = SpreadsheetApp.getActive().getSheetByName('LOG');
-  // Default user properties: list of kiosks to pull data for and for between what date.
-  var _getDefaultProporties = {
-    "kiosk_id.or" : Object.keys(KIOSK_IDS_MAP),
-    "created_at.between" : [0, Date.now()],
-    "sale_line.between": [0, 0],
-    "sorties_line.between": [0, 0]
-  };
     
   function saveToDrive(filename, data){
     data = JSON.stringify(data);
@@ -42,7 +11,6 @@ var KIOSK_IDS_MAP = {
   
   function _toast(msg){
     ss.toast( msg);
-    logSheet.getRange(2,1).setValue(msg);
   };
   
   function _hello(){
@@ -69,6 +37,8 @@ var KIOSK_IDS_MAP = {
   
   // Make a query from sema
   function _fetch (verb, endpoint, data) {
+    // TODO: Add payload to endpoint for GET request.
+    
     // url
     url = API_BASE_URL + endpoint;
     // Define request parameters
@@ -95,6 +65,6 @@ var KIOSK_IDS_MAP = {
   // Update user properties
   function _setUserProperties(properties){
     // TODO: Merge default with new propertie sets.
-    properties = Object.assign({}, _getDefaultProporties, properties);
+    properties = Object.assign({}, DEFAULT_PROPERTIES, properties);
     PropertiesService.getUserProperties().setProperty('properties', JSON.stringify(properties));
   };
