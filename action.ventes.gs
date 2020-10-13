@@ -2,8 +2,7 @@
   function uploadSaleRange() {
     try {
       // Request line range
-      var betweenLine = [1951, 2108];
-      // var betweenLine = _prompt("What range, or lines, to upload?", "Fomat: [START_LINE, END_LINE]").split(",");
+      var betweenLine = _prompt("What range, or lines, to upload?", "Fomat: [START_LINE, END_LINE]").split(",");
       // sales data
       var data = spreadsheetToJson({
         sheetName: "VENTES",
@@ -121,7 +120,7 @@
 //   };
 // }
 
-// function formatLineItem(receipt, ind) {
+// function formatLineItemForSale(receipt, ind) {
 //   // Reference to current index line on reeceipt
 //   var receipt_line_item = receipt.receipt_line_items[ind];
 //   // Resulted formatted receipt
