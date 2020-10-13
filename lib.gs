@@ -117,4 +117,3 @@
     properties = Object.assign({}, DEFAULT_PROPERTIES, properties);
     PropertiesService.getUserProperties().setProperty('properties', JSON.stringify(properties));
   };
-
