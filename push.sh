@@ -33,11 +33,15 @@ echo "- Updating project for Limonade... \n"
 # Limonade | 8
 clasp setting scriptId 17m30t0Wao0eI8v8V94xD-oP1x7OiCHlERpJOnelKIXR8KXj8B_aBbT2C
 clasp push
-echo "- Updating project for Ouanaminthe... \n"
+echo "- Updating project for Ouanaminthe ... \n"
 # Ouanamonthe | 9
 clasp setting scriptId 1dYurGJQ5KB_f__yiH-Pd84CojbFvTFvbXHF5SdJLbEsVKDI6yafgmTgj
 clasp push
-echo "- Updating and setting back to project for General... \n"
+echo "- Updating project for Dashboard+Tools+Sources ... \n"
+# Ouanamonthe | 9
+clasp setting scriptId 1eTg7xBp0_rPPjVCmpZX1ha470pXh2qR2ehGFW1RB1HF_1bheMrzL20J2
+clasp push
+echo "- Updating and setting back to project for General ... \n"
 # General | 0 (Update it the repo back to general)
 clasp setting scriptId  1iWmlrID4G4RhCnXukmBDEoMdOvat5VYaAMcXGc1spolwsP6KE4XaUCJO
 clasp push
