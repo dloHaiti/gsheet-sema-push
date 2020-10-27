@@ -42,8 +42,7 @@ function uploadSaleRange() {
 }
 
 // Update sales
-// function sales(properties) {
-//   properties = Object.assign({}, DEFAULT_PROPERTIES, properties);
+// function loadSaleRangeFromSema(properties) {
 //   // Sales endpoint
 //   const API_SALE_ENDPOINT = '/sema/site/receipts';
 //   // Sale sheet
@@ -51,6 +50,7 @@ function uploadSaleRange() {
   
 //   try {
 //     // Get receipts from sema
+//     properties = Object.assign({}, DEFAULT_PROPERTIES, properties);
 //     const receipts = _fetch('get', API_SALE_ENDPOINT, properties);
 //     // normalize from receipts to sale lines
 //     const sales = [];

@@ -86,19 +86,24 @@ function _alert(message) {
 
 // Make a query from sema
 function _fetch(verb, endpoint, data) {
-  // TODO: Add payload to endpoint for GET request.
   var url = API_BASE_URL + endpoint;
   var options = {
     "sync": true,
-    "method": verb, // setting verb
-    'payload': data && JSON.stringify(data), // setting data
-
+    "method": verb.trim().toUpperCase(), // setting verb
     "crossDomain": true,
-    "contentType": "application/json",
     "headers": {
       "cache-control": "no-cache"
     },
   };
+  if (data) {
+    if (options.method === 'GET') {
+      const search = new URLSearchParams(properties);
+      url = `${url}/?${search.toString()}`;
+    } else {
+      option.contentType = 'application/json';
+      options.payload = JSON.stringify(data);
+    }
+  }
   return JSON.parse(UrlFetchApp.fetch(url, options).getContentText());
 }
 
