@@ -56,15 +56,15 @@ function saveToDrive(filename, data) {
 
 function _log(msg) {
   logSheet.getRange(1, 1).setValue(msg);
-};
+}
 
 function _toast(msg) {
   ss.toast(msg);
-};
+}
 
 function _hello() {
   ss.toast("HELLO");
-};
+}
 
 function _prompt(title, msg) {
   // prompt(title, prompt, buttons)
@@ -82,7 +82,7 @@ function _prompt(title, msg) {
 // Print message in dialog alert
 function _alert(message) {
   ui.alert(message);
-};
+}
 
 // Make a query from sema
 function _fetch(verb, endpoint, data) {
@@ -114,7 +114,6 @@ function _getUserProperties() {
 
 // Update user properties
 function _setUserProperties(properties) {
-  // TODO: Merge default with new propertie sets.
   PropertiesService.getUserProperties().setProperty('properties', JSON.stringify(properties));
 }
 
