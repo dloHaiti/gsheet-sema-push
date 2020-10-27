@@ -41,39 +41,43 @@ function uploadSaleRange() {
   }
 }
 
-
-
-
-//   // Update sales
+// Update sales
 // function sales(properties) {
-
+//   properties = Object.assign({}, DEFAULT_PROPERTIES, properties);
 //   // Sales endpoint
-//   var API_SALE_ENDPOINT = '/sema/site/receipts';
+//   const API_SALE_ENDPOINT = '/sema/site/receipts';
 //   // Sale sheet
-//   var sheet = SpreadsheetApp.getActive().getSheetByName('AllSales');
-
+//   const sheet = SpreadsheetApp.getActive().getSheetByName('AllSales');
+  
 //   try {
 //     // Get receipts from sema
-//     var receipts = _fetch('GET', API_GET_SALE_ENDPOINT, properties);
-//     // clear sale sheet
-//     sheet.clear();
+//     const receipts = _fetch('get', API_SALE_ENDPOINT, properties);
 //     // normalize from receipts to sale lines
-//     var sales = [];
+//     const sales = [];
+//     const sale = null;
 //     receipts.forEach(function(receipt, ind, arr){
 //       // Make sales line from receipt line items sales
-//       sales.push(getSalesFromReceipts(receipt));
+//       sale = getSalesFromReceipts(receipt);
+//       if(sale){
+//         sales.push(sale);
+//       }
 //     });
 //     // Add header to sales output
 //     sales.unshift(getHead());
 //     // Clear and get range from sheet
 //     // getRange(LINE, COLUMN)
 //     var range = sheet.clear().getRange(1, 1, sales.length, (sales[0]).length);
+//     // save to drive
+//     saveToDrive("sales.json", sales);
 //     // update sale range
 //     range.setValues(sales);
+//     // toast success
+//     _toast("Done");
 //   }catch(err){
 //     console.log(err.message);
 //   }
 // }
+
 
 // function getHead(){
 //   return [
@@ -90,11 +94,11 @@ function uploadSaleRange() {
 //     ];
 // }
 
-// function getSalesFromReceipts(){
+// function getSalesFromReceipts(receipt){
 //   // Skip empty receipt
 //   if((receipt.receipt_line_items && receipt.receipt_line_items.length)){
 //     // Get sale data from line item
-//     var formattedLineItem = formatLineItem(receipt, 0);
+//     var formattedLineItem = formatReceiptLineItem(receipt, 0);
 //     // Create sale line for receipt
 //     return [
 //       // 1. kiosk
@@ -121,32 +125,23 @@ function uploadSaleRange() {
 //   };
 // }
 
-// function formatLineItemForSale(receipt, ind) {
-//   // Reference to current index line on reeceipt
-//   var receipt_line_item = receipt.receipt_line_items[ind];
-//   // Resulted formatted receipt
-//   var formattedLineItem = {};
-//   // ouput sku
+// function formatReceiptLineItem(receipt, ind) {
+//   // Reference to current index line on receipt
+//   const receipt_line_item = receipt.receipt_line_items[ind];
+//   const formattedReceiptLineItem = {};
+  
 //   formattedLineItem.sku = receipt_line_item.product.sku;
-//   if(formattedLineItem.sku && (formattedLineItem.sku=="LOANPAYOFF")){
-//     // ouput qty
-//     formattedLineItem.quantity = 0;
-//     // output gallon
-//     formattedLineItem.gallons = 0;
-//     // output price total
-//     formattedLineItem.total = 0;
-//     // output credit
-//     formattedLineItem.credit = receipt.amount_cash ? parseInt(receipt.amount_cash, 10) : 0;
+//   if(formattedReceiptLineItem.sku && (formattedReceiptLineItem.sku=="LOANPAYOFF")){
+//     formattedReceiptLineItem.quantity = 0;
+//     formattedReceiptLineItem.gallons = 0;
+//     formattedReceiptLineItem.total = 0;
+//     formattedReceiptLineItem.credit = receipt.amount_cash ? parseFloat(receipt.amount_cash, 10) : 0;
 //   }
 //   else{
-//     // ouput qty
-//     formattedLineItem.quantity = parseInt((receipt_line_item).quantity, 10);
-//     // output gallon
-//     formattedLineItem.gallons = parseInt(receipt_line_item.product.unit_per_product, 10) * parseInt(receipt_line_item.quantity, 10);
-//     // output price total
-//     formattedLineItem.total = parseInt(receipt_line_item.price_total, 10);
-//     // output credit
-//     formattedLineItem.credit = receipt.amount_loan ? parseInt(receipt.amount_loan, 10) : 0;
+//     formattedReceiptLineItem.quantity = parseFloat((receipt_line_item).quantity, 10);
+//     formattedReceiptLineItem.gallons = parseFloat(receipt_line_item.product.unit_per_product, 10) * parseFloat(receipt_line_item.quantity, 10);
+//     formattedReceiptLineItem.total = parseFloat(receipt_line_item.price_total, 10);
+//     formattedReceiptLineItem.credit = receipt.amount_loan ? parseFloat(receipt.amount_loan, 10) : 0;
 //   }
-//   return formattedLineItem;
-// }  
+//   return formattedReceiptLineItem;
+// }

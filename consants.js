@@ -36,5 +36,3 @@ var ss = SpreadsheetApp.getActiveSpreadsheet();
 var ui = SpreadsheetApp.getUi();
 // Use the `LOG` sheet for code output log
 var logSheet = SpreadsheetApp.getActive().getSheetByName('LOG');
-
-// properties = Object.assign({}, DEFAULT_PROPERTIES, properties);
