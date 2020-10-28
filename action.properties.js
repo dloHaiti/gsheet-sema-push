@@ -3,20 +3,9 @@
 // var DEFAULT_PROPERTIES = {
 //     "kiosk_id.or": Object.keys(KIOSK_IDS_MAP),
 //     "created_at.between": [0, Date.now()],
-//     "sale_line.between": [0, 0],
-//     "sorties_line.between": [0, 0]
 // };
 
-// var KIOSK_IDS_MAP = {
-//     "saintard": 1,
-//     "corail": 2,
-//     "cabaret": 4,
-//     "santo19": 5,
-//     "bois9": 6,
-//     "quartier morin": 7,
-//     "limonade": 8,
-//     "ouanaminthe": 9
-//   };
+// var KIOSK_IDS_MAP = {};
 
 
 function setWhatKiosks() {
