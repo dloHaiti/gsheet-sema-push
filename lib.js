@@ -73,10 +73,11 @@ function _prompt(title, msg) {
     return response.getResponseText();
   } else if (response.getSelectedButton() == ui.Button.CANCEL) {
     _toast('Canceled.');
+    return false;
   } else {
     _toast('Closed');
+    return false;
   }
-  return null;
 }
 
 // Print message in dialog alert
@@ -109,11 +110,13 @@ function _fetch(verb, endpoint, data) {
 
 // Get user properties
 function _getUserProperties() {
-  return PropertiesService.getUserProperties().getProperty('properties');
+  return PropertiesService.getUserProperties().getProperty('properties') || {};
 }
 
 // Update user properties
 function _setUserProperties(properties) {
-  PropertiesService.getUserProperties().setProperty('properties', JSON.stringify(properties));
+  const userProperties = _getUserProperties();
+  properties = {...userProperties, ...properties};
+  return PropertiesService.getUserProperties().setProperty('properties', JSON.stringify(properties));
 }
 
