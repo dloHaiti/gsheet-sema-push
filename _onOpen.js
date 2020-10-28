@@ -6,6 +6,16 @@ function onOpen() {
   ui.createMenu('SEMA - push')
     .addItem('Upload sale range', 'uploadSaleRange')
     .addSeparator()
-    .addItem('Upload expense range', 'uploadSortiesRange')
+    .addItem('Upload sale range', 'uploadSaleRange')
+    .addItem('For what kiosk', 'setWhatKiosks')
     .addToUi();
+
+  // Add `SEMA` menu
+  ui.createMenu('SEMA -pull')
+  .addItem('Refresh data', 'refreshData')
+  .addSeparator()
+  .addSubMenu(ui.createMenu('Configure')
+                  .addItem("For what kiosks?", 'setWhatKiosks')
+                  .addItem("Between which dates?", 'setBetweenDate'))
+      .addToUi();
 }
