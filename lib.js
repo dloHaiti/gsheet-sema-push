@@ -111,6 +111,7 @@ function _fetch(verb, endpoint, data) {
   };
   if (data) {
     if (options.method === 'GET') {
+      url += '/';
       url = url.addQuery(data);
     } else {
       options.contentType = 'application/json';

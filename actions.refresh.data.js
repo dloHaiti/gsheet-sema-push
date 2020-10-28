@@ -23,7 +23,7 @@ function loadExpenseRangeFromSema() {
     expenses.unshift(
         ["Kiosk", "Date", "Account #", "Total", "Description", "Category", "Sub Category"]
     );
-    const data = { sheetName: "testAllExpenses", data: expenses };
+    const data = { sheetName: "AllExpenses", data: expenses };
     jsonToSpreadsheet(data);
 }
 
@@ -41,26 +41,27 @@ function loadSaleRangeFromSema() {
                 new Date(receipt.created_at).toDateString(),
                 receipt.customer_account.id,
                 receipt.customer_account.name,
+                receipt.sales_channel.name,
                 item.product.sku,
                 parseFloat(item.quantity,10) || 0,
-                parseFloat((item.gallons,10) || 0,
-                parseFloat(item.total, 10) || 0,
+                parseFloat(item.quantity,10)*item.product.unit_per_product || 0,
+                parseFloat(item.price_total, 10) || 0,
                 (item.product.sku=="LOANPAYOFF") ? parseFloat(receipt.amount_cash, 10) : 0
             ];
         }
-        return sales;
+        return sales.length ? sales : null;
     }
 
     try {
         const properties = { ...DEFAULT_PROPERTIES, ..._getUserProperties() };
         const receipts = _fetch('get', API_SALE_ENDPOINT, properties);
         // normalize from receipts to sale lines
-        const sales = [];
+        let sales = [];
         receipts.forEach(function (receipt, ind, arr) {
             // Make sales line from receipt line items sales
-            let sale = getSalesFromReceipt(receipt);
-            if (sale) {
-                sales.push(sale);
+            let _sales_ = getSalesFromReceipt(receipt);
+            if (_sales_) {
+                sales = sales.concat(_sales_);
             }
         });
         // Add header to sales output
