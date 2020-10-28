@@ -1,4 +1,13 @@
 
+String.prototype.addQuery = function(obj) {
+  return this + Object.keys(obj).reduce(function(p, e, i) {
+    return p + (i == 0 ? "?" : "&") +
+      (Array.isArray(obj[e]) ? obj[e].reduce(function(str, f, j) {
+        return str + e + "=" + encodeURIComponent(f) + (j != obj[e].length - 1 ? "&" : "")
+      },"") : e + "=" + encodeURIComponent(obj[e]));
+  },"");
+}
+
 
 function _createReceiptFromVentes(line) {
   var receipt = {};
@@ -102,10 +111,9 @@ function _fetch(verb, endpoint, data) {
   };
   if (data) {
     if (options.method === 'GET') {
-      const search = new URLSearchParams(properties);
-      url = `${url}/?${search.toString()}`;
+      url = url.addQuery(data);
     } else {
-      option.contentType = 'application/json';
+      options.contentType = 'application/json';
       options.payload = JSON.stringify(data);
     }
   }

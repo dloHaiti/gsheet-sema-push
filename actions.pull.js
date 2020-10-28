@@ -1,5 +1,6 @@
 
 function refreshData() {
+    // loadSaleRangeFromSema();
     loadExpenseRangeFromSema();
 }
 
