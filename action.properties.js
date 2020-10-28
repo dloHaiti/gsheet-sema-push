@@ -25,7 +25,7 @@ function resetProperty() {
               return kiosk_id;
           });
           const properties = {};
-          properties['kiosk_id.or'] = kiosk_ids_or;
+          properties['kiosk_id_or'] = kiosk_ids_or;
           return _setUserProperties(properties);
       } catch (err) {
           _log(JSON.stringify(err));
@@ -42,7 +42,7 @@ function resetProperty() {
               (betweenDates[1]) ? new Date(betweenDates[1]) : new Date()
           ];
           const properties = {};
-          properties['created_at.between'] = created_at_between;
+          properties['created_at_between'] = created_at_between;
           return _setUserProperties(properties);
       } catch (err) {
           _log(JSON.stringify(err));

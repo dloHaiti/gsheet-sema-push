@@ -2,8 +2,8 @@
 function refreshData() {
     // Update sales and expenses from kiosks
     try {
-        // loadSaleRangeFromSema();
-        loadExpenseRangeFromSema();
+        loadSaleRangeFromSema();
+        // loadExpenseRangeFromSema();
     } catch (err) {
         _log(err.message);
         _toast(err.message);
@@ -31,65 +31,34 @@ function loadExpenseRangeFromSema() {
 function loadSaleRangeFromSema() {
     const API_SALE_ENDPOINT = '/sema/site/receipts';
     const sheet = SpreadsheetApp.getActive().getSheetByName('AllSales');
-    const getSalesFromReceipts = function (receipt) {
-        // Skip empty receipt
-        if ((receipt.receipt_line_items && receipt.receipt_line_items.length)) {
-            // Get sale data from line item
-            var formattedLineItem = formatReceiptLineItem(receipt, 0);
-            // Create sale line for receipt
-            return [
-                // 1. kiosk
+    const getSalesFromReceipt = function (receipt) {
+        const sales = [];
+        const items = receipt.receipt_line_items;
+        for (var i = 0, len = items.length; i < len; i++) {
+            let item = items[i];
+            sales[i] = [
                 receipt.kiosk.name,
-                // 2. date
                 new Date(receipt.created_at).toDateString(),
-                // 3. customer id
                 receipt.customer_account.id,
-                // 4. customer name
                 receipt.customer_account.name,
-                // 5. sales channel
-                receipt.sales_channel.name,
-                // 6. sku // TODO: Should print all line items form receipt
-                formattedLineItem.sku,
-                // 7. quantity
-                formattedLineItem.quantity,
-                // 8. gallons
-                formattedLineItem.gallons,
-                // 10. total
-                formattedLineItem.total,
-                // 9. credit
-                formattedLineItem.credit
+                item.product.sku,
+                parseFloat(item.quantity,10) || 0,
+                parseFloat((item.gallons,10) || 0,
+                parseFloat(item.total, 10) || 0,
+                (item.product.sku=="LOANPAYOFF") ? parseFloat(receipt.amount_cash, 10) : 0
             ];
-        };
-    }
-    const formatReceiptLineItem = function (receipt, ind) {
-        // Reference to current index line on receipt
-        const receipt_line_item = receipt.receipt_line_items[ind];
-        const formattedReceiptLineItem = {};
-
-        formattedLineItem.sku = receipt_line_item.product.sku;
-        if (formattedReceiptLineItem.sku && (formattedReceiptLineItem.sku == "LOANPAYOFF")) {
-            formattedReceiptLineItem.quantity = 0;
-            formattedReceiptLineItem.gallons = 0;
-            formattedReceiptLineItem.total = 0;
-            formattedReceiptLineItem.credit = receipt.amount_cash ? parseFloat(receipt.amount_cash, 10) : 0;
         }
-        else {
-            formattedReceiptLineItem.quantity = parseFloat((receipt_line_item).quantity, 10);
-            formattedReceiptLineItem.gallons = parseFloat(receipt_line_item.product.unit_per_product, 10) * parseFloat(receipt_line_item.quantity, 10);
-            formattedReceiptLineItem.total = parseFloat(receipt_line_item.price_total, 10);
-            formattedReceiptLineItem.credit = receipt.amount_loan ? parseFloat(receipt.amount_loan, 10) : 0;
-        }
-        return formattedReceiptLineItem;
+        return sales;
     }
 
     try {
-        const properties = _getUserProperties();
+        const properties = { ...DEFAULT_PROPERTIES, ..._getUserProperties() };
         const receipts = _fetch('get', API_SALE_ENDPOINT, properties);
         // normalize from receipts to sale lines
         const sales = [];
         receipts.forEach(function (receipt, ind, arr) {
             // Make sales line from receipt line items sales
-            let sale = getSalesFromReceipts(receipt);
+            let sale = getSalesFromReceipt(receipt);
             if (sale) {
                 sales.push(sale);
             }

@@ -25,10 +25,10 @@ var KIOSK_IDS_MAP = {
 };
 // Default user properties: list of kiosks to pull data for and for between what date.
 var DEFAULT_PROPERTIES = {
-  "kiosk_id.or": Object.keys(KIOSK_IDS_MAP),
-  "created_at.between": [0, Date.now()],
-  "sale_line.between": [0, 0],
-  "sorties_line.between": [0, 0]
+  "sale_line_between": [0, 0],
+  "sorties_line_between": [0, 0],
+  "kiosk_id_or": Object.values(KIOSK_IDS_MAP),
+  "created_at_between": [0, Date.now()],
 };
 
 // Sheet
