@@ -55,7 +55,11 @@ function saveToDrive(filename, data) {
 }
 
 function _log(msg) {
-  logSheet.getRange(1, 1).setValue(msg);
+  if(logSheet){
+    return logSheet.getRange(1, 1).setValue(msg);
+  }else{
+    return _alert(msg);
+  }
 }
 
 function _toast(msg) {
@@ -110,7 +114,8 @@ function _fetch(verb, endpoint, data) {
 
 // Get user properties
 function _getUserProperties() {
-  return PropertiesService.getUserProperties().getProperty('properties') || {};
+  const userProperties = JSON.parse( PropertiesService.getUserProperties().getProperty('properties') );
+  return userProperties || {};
 }
 
 // Update user properties
@@ -120,3 +125,7 @@ function _setUserProperties(properties) {
   return PropertiesService.getUserProperties().setProperty('properties', JSON.stringify(properties));
 }
 
+// Reset property
+function _resetProperty() {
+  return PropertiesService.getUserProperties().setProperty('properties', JSON.stringify({}));
+}

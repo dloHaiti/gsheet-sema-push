@@ -19,6 +19,7 @@ var KIOSK_IDS_MAP = {
   "santo19": 5,
   "bois9": 6,
   "quartier morin": 7,
+  "quartier-morin": 7,
   "limonade": 8,
   "ouanaminthe": 9
 };
