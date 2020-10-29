@@ -7,7 +7,7 @@ function onOpen() {
     .addItem('Upload sale range', 'uploadSaleRange')
     .addSeparator()
     .addItem('Upload sale range', 'uploadSaleRange')
-    .addItem('For what kiosk', 'setWhatKiosks')
+    .addItem('Set kiosks', 'setWhichKiosks')
     .addToUi();
 
   // Add `SEMA` menu
@@ -15,8 +15,8 @@ function onOpen() {
   .addItem('Refresh data', 'refreshData')
   .addSeparator()
   .addSubMenu(ui.createMenu('Configure')
-                  .addItem("For which kiosks?", 'setWhatKiosks')
-                  .addItem("Between which dates?", 'setBetweenDate')
+                  .addItem("Set kiosks.", 'setWhichKiosks')
+                  .addItem("Set date range.", 'setBetweenDate')
                   .addItem("Reset to default settings.", 'resetProperty')) 
   .addToUi();
 }

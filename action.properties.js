@@ -12,7 +12,7 @@ function resetProperty() {
   }
   
   
-  function setWhatKiosks() {
+  function setWhichKiosks() {
       try {
           // Request line range
           var kioskNameList = _prompt("For what kiosks to pull data?", "Format: [Saintard, Corail, ... ]").split(",");
