@@ -2,8 +2,9 @@
 function refreshData() {
     // Update sales and expenses from kiosks
     try {
-        loadSaleRangeFromSema();
-        // loadExpenseRangeFromSema();
+        const properties = { ...DEFAULT_PROPERTIES, ..._getUserProperties() };
+        loadSaleRangeFromSema(properties);
+        // loadExpenseRangeFromSema(properties);
     } catch (err) {
         _log(err.message);
         _toast(err.message);
@@ -11,8 +12,7 @@ function refreshData() {
 }
 
 // Update expenses
-function loadExpenseRangeFromSema() {
-    const properties = { ...DEFAULT_PROPERTIES, ..._getUserProperties() };
+function loadExpenseRangeFromSema(properties) {
     let expenses = _fetch('GET', API_GET_EXPENSE_ENDPOINT, properties);
     // normalize expenses to expense line
     expenses = expenses.map(function (expense, ind, arr) {
@@ -28,42 +28,40 @@ function loadExpenseRangeFromSema() {
 }
 
 // Update sales
-function loadSaleRangeFromSema() {
+function loadSaleRangeFromSema(properties) {
     const API_SALE_ENDPOINT = '/sema/site/receipts';
     const sheet = SpreadsheetApp.getActive().getSheetByName('AllSales');
-    const getSalesFromReceipt = function (receipt) {
+    const getSalesFromReceipts = function (receipts) {
         const sales = [];
-        const items = receipt.receipt_line_items;
-        for (var i = 0, len = items.length; i < len; i++) {
-            let item = items[i];
-            sales[i] = [
-                receipt.kiosk.name,
-                new Date(receipt.created_at).toDateString(),
-                receipt.customer_account.id,
-                receipt.customer_account.name,
-                receipt.sales_channel.name,
-                item.product.sku,
-                parseFloat(item.quantity,10) || 0,
-                parseFloat(item.quantity,10)*item.product.unit_per_product || 0,
-                parseFloat(item.price_total, 10) || 0,
-                (item.product.sku=="LOANPAYOFF") ? parseFloat(receipt.amount_cash, 10) : 0
-            ];
+
+        for (let rI = 0, rLen = receipts.length; rI < rLen; rI++) {
+            const receipt = receipts[rI];
+            const items = receipt.receipt_line_items;
+            for (var i = 0, len = items.length; i < len; i++) {
+                let item = items[i];
+                let sale = [
+                    receipt.kiosk.name,
+                    new Date(receipt.created_at).toDateString(),
+                    receipt.customer_account.id,
+                    receipt.customer_account.name,
+                    receipt.sales_channel.name,
+                    item.product.sku,
+                    parseFloat(item.quantity, 10) || 0,
+                    parseFloat(item.quantity, 10) * item.product.unit_per_product || 0,
+                    parseFloat(item.price_total, 10) || 0,
+                    (item.product.sku == "LOANPAYOFF") ? parseFloat(receipt.amount_cash, 10) : 0
+                ];
+                sales.push(sale);
+
+            }
         }
         return sales.length ? sales : null;
     }
 
     try {
-        const properties = { ...DEFAULT_PROPERTIES, ..._getUserProperties() };
         const receipts = _fetch('get', API_SALE_ENDPOINT, properties);
         // normalize from receipts to sale lines
-        let sales = [];
-        receipts.forEach(function (receipt, ind, arr) {
-            // Make sales line from receipt line items sales
-            let _sales_ = getSalesFromReceipt(receipt);
-            if (_sales_) {
-                sales = sales.concat(_sales_);
-            }
-        });
+        const sales = getSalesFromReceipts(receipts);
         // Add header to sales output
         sales.unshift([
             "Kiosk", "Date", "Customer ID", "Customer Name", "Sales Channel", "SKU", "Qty", "Gallons", "Total", "Credit"

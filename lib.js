@@ -79,18 +79,15 @@ function _hello() {
   ss.toast("HELLO");
 }
 
-function _prompt(title, msg) {
+function _prompt(title="Title", msg="") {
   // prompt(title, prompt, buttons)
-  var response = ui.prompt(title, msg, ui.ButtonSet.OK_CANCEL);
-  if (response.getSelectedButton() == ui.Button.OK) {
-    return response.getResponseText();
-  } else if (response.getSelectedButton() == ui.Button.CANCEL) {
-    _toast('Canceled.');
-    return false;
-  } else {
-    _toast('Closed');
-    return false;
+  const response = ui.prompt(title, msg, ui.ButtonSet.OK_CANCEL);
+  const data = response.getResponseText();
+  const btn = response.getSelectedButton().toString().trim().toLowerCase();
+  if (btn.includes("cancel")) {
+    return null;
   }
+  return data;
 }
 
 // Print message in dialog alert

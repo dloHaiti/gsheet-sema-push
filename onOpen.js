@@ -15,8 +15,8 @@ function onOpen() {
   .addItem('Refresh data', 'refreshData')
   .addSeparator()
   .addSubMenu(ui.createMenu('Configure')
-                  .addItem("Reset!", 'resetProperty')
                   .addItem("For what kiosks?", 'setWhatKiosks')
-                  .addItem("Between which dates?", 'setBetweenDate')) 
+                  .addItem("Between which dates?", 'setBetweenDate')
+                  .addItem("Reset!", 'resetProperty')) 
   .addToUi();
 }

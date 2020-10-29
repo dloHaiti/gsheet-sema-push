@@ -41,11 +41,16 @@ function resetProperty() {
               new Date(betweenDates[0]),
               (betweenDates[1]) ? new Date(betweenDates[1]) : new Date()
           ];
+          const validDate = created_at_between[0] * created_at_between[1];
+          if(!validDate){
+            throw "Cannot validate the date.";
+          }
           const properties = {};
           properties['created_at_between'] = created_at_between;
           return _setUserProperties(properties);
       } catch (err) {
-          _log(JSON.stringify(err));
-          _toast(JSON.stringify(err));
+          const msg = "Cannot validate the date.";
+          _log(msg);
+          _toast(msg);
       }
   }
