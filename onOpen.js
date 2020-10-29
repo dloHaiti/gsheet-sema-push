@@ -6,8 +6,8 @@ function onOpen() {
   ui.createMenu('SEMA - push')
     .addItem('Upload sale range', 'uploadSaleRange')
     .addSeparator()
-    .addItem('Upload sale range', 'uploadSaleRange')
-    .addItem('Set kiosks', 'setWhichKiosks')
+    .addItem('Upload expense range', 'uploadSortiesRange')
+    .addItem('Set kiosks', 'uploadSortiesRange')
     .addToUi();
 
   // Add `SEMA` menu
