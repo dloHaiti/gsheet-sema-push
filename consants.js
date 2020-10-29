@@ -1,7 +1,7 @@
 
 // API base url
-// const API_BASE_URL = "http://162.243.83.79:81";
-const API_BASE_URL = "https://api.haiti.semawater.mooo.com";
+const API_BASE_URL = "http://162.243.83.79:81";
+// const API_BASE_URL = "https://api.haiti.semawater.mooo.com";
 // Sale endpoint
 var API_POST_SALE_ENDPOINT = '/sema/site/receipts/bulk';
 var API_GET_SALE_ENDPOINT = '/sema/site/receipts';
@@ -29,7 +29,7 @@ var DEFAULT_PROPERTIES = {
   "sale_line_between": [0, 0],
   "sorties_line_between": [0, 0],
   "kiosk_id_or": Object.values(KIOSK_IDS_MAP),
-  "created_at_between": [0, Date.now()],
+  "created_at_between": [new Date(0), new Date()],
 };
 
 // Sheet
