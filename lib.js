@@ -133,5 +133,5 @@ function _setUserProperties(properties) {
 
 // Reset property
 function _resetProperty() {
-  return PropertiesService.getUserProperties().setProperty('properties', JSON.stringify({}));
+  return PropertiesService.getUserProperties().setProperty('properties', JSON.stringify(DEFAULT_PROPERTIES));
 }
