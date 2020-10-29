@@ -58,9 +58,9 @@ function loadSaleRangeFromSema(properties) {
                     receipt.customer_account.name,
                     receipt.sales_channel.name,
                     item.product.sku,
-                    parseFloat(item.quantity, 10) || 0,
-                    parseFloat(item.quantity, 10) * item.product.unit_per_product || 0,
-                    parseFloat(item.price_total, 10) || 0,
+                    (item.product.sku == "LOANPAYOFF") ? 0 : (parseFloat(item.quantity, 10)||0),
+                    (item.product.sku == "LOANPAYOFF") ? 0 : (parseFloat(item.quantity, 10) * item.product.unit_per_product)||0,
+                    (item.product.sku == "LOANPAYOFF") ? 0 : (parseFloat(item.price_total, 10)||0),
                     (item.product.sku == "LOANPAYOFF") ? parseFloat(receipt.amount_cash, 10) : 0
                 ];
                 sales.push(sale);
