@@ -1,6 +1,7 @@
 
 // API base url
-var API_BASE_URL = "http://162.243.83.79:81";
+// const API_BASE_URL = "http://162.243.83.79:81";
+const API_BASE_URL = "https://api.haiti.semawater.mooo.com";
 // Sale endpoint
 var API_POST_SALE_ENDPOINT = '/sema/site/receipts/bulk';
 var API_GET_SALE_ENDPOINT = '/sema/site/receipts';
