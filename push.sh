@@ -61,8 +61,8 @@ clasp push
 
 echo "- Updating project for # Dev Dashboard+Tools+Sources ... \n\n"
 # Ouanamonthe | 9
-clasp setting scriptId 18xd1gq27yXnyx75P8cZmnm_FEvUcdkA-AQYvbPJyadedtGfqtehGzKqI
-clasp push
+# clasp setting scriptId 18xd1gq27yXnyx75P8cZmnm_FEvUcdkA-AQYvbPJyadedtGfqtehGzKqI
+# clasp push
 
 
 
