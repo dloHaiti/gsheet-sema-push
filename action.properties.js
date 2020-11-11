@@ -15,7 +15,7 @@ function resetProperty() {
   function setWhichKiosks() {
       try {
           // Request line range
-          var kioskNameList = _prompt("For what kiosks to pull data?", "Format: [Saintard, Corail, ... ]").split(",");
+          var kioskNameList = _prompt("For which kiosks to pull data?", "Format: [Saintard, Corail, ... ]").split(",");
           var kiosk_ids_or = kioskNameList.map(name => {
               name = name.trim().toLowerCase();
               const kiosk_id = KIOSK_IDS_MAP[name];
@@ -36,7 +36,7 @@ function resetProperty() {
   function setBetweenDate() {
       try {
           // Request line range
-          const betweenDates = _prompt("For what date range?", "Format: [MM/DD/YYYY] or [MM/DD/YYYY, MM/DD/YYYY]").split(",");
+          const betweenDates = _prompt("For which date range?", "Format: [MM/DD/YYYY] or [MM/DD/YYYY, MM/DD/YYYY]").split(",");
           const created_at_between = [
               new Date(betweenDates[0]),
               (betweenDates[1]) ? new Date(betweenDates[1]) : new Date()
