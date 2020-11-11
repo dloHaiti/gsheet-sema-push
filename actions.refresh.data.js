@@ -1,16 +1,5 @@
 
 
-function autoRefreshData() {
-    try {
-        const properties = DEFAULT_PROPERTIES;
-        loadSaleRangeFromSema(properties);
-        // loadExpenseRangeFromSema(properties);
-    } catch (err) {
-        _log(err.message);
-        _toast(err.message);
-    }
-}
-
 function refreshData() {
     // Update sales and expenses from kiosks
     try {
