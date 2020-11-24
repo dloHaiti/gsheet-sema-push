@@ -18,7 +18,7 @@ function loadExpenseRangeFromSema(properties) {
     // normalize expenses to expense line
     expenses = expenses.map(function (expense, ind, arr) {
         return [
-            expense.kiosk.name, new Date(expense.created_at), " ", parseFloat(expense.total, 10), expense.note || "", expense.expense_account.category, expense.expense_account.name
+            expense.kiosk.name, new Date(expense.created_at), " ", parseFloat(expense.total, 10), expense.notes || "", expense.expense_account.category, expense.expense_account.name
         ];
     });
     expenses.unshift(
