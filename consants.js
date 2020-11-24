@@ -10,7 +10,6 @@ var API_POST_EXPENSE_ENDPOINT = '/sema/site/expenses/bulk';
 var API_GET_EXPENSE_ENDPOINT = '/sema/site/expenses';
 
 var USER_ID = 7;
-var KIOSK_ID = null;
 
 // KIOSK To ID
 var KIOSK_IDS_MAP = {
