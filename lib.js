@@ -35,7 +35,8 @@ function _createReceiptFromVentes(line) {
     }
   ];
   receipt.user_id = USER_ID;
-  receipt.uuid = line.receipt_uuid;
+  receipt.uuid = (line.receipt_uuid && line.receipt_uuid.length) ? 
+  line.receipt_uuid : null;
   receipt.line_number = parseInt(line.line_number, 10) || 0;
 
   return receipt;

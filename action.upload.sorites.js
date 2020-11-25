@@ -7,6 +7,7 @@ function uploadSortiesRange() {
     sheetName: "SORTIES",
     rowBetween: betweenLine
   });
+  // TODO: Use _createExpenseFromSorties
 
   console.log(data);
 

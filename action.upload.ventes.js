@@ -11,14 +11,14 @@ function uploadSaleRange() {
     });
     // Getting our sales into receipt
     var receipts = data.map((sale) => _createReceiptFromVentes(sale))
-      // filter empty sale lines.
+      // filter out empty sale lines.
       .filter((receipt) => {
         return (receipt.customer_id && receipt.customer_id.length) || (receipt.quantity && receipt.total) || (receipt.receipt_uuid && receipt.receipt_uuid.length);
       });
     // Upload receipts to sema
-    var result = _fetch("POST", API_POST_SALE_ENDPOINT, receipts);
+    var _receipts = _fetch("POST", API_POST_SALE_ENDPOINT, receipts);
     // TODO: Test Log uuid of each receipt on success
-    result.forEach(function (receipt, index) {
+    _receipts.forEach(function (receipt, index) {
       // update uuid
       updatePosition({
         sheetName: "VENTES",
