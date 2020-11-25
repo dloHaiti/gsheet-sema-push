@@ -13,7 +13,7 @@ function uploadSaleRange() {
     var receipts = data.map((sale) => _createReceiptFromVentes(sale))
       // filter out empty sale lines.
       .filter((receipt) => {
-        return (receipt.customer_id && receipt.customer_id.length) || (receipt.quantity && receipt.total) || (receipt.receipt_uuid && receipt.receipt_uuid.length);
+        return (receipt.customer_account_id && receipt.customer_account_id.length) || (receipt.quantity && receipt.total) || (receipt.receipt_uuid && receipt.receipt_uuid.length);
       });
     // Upload receipts to sema
     var _receipts = _fetch("POST", API_POST_SALE_ENDPOINT, receipts);

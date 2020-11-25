@@ -32,32 +32,6 @@ function loadExpenseRangeFromSema(properties) {
 function loadSaleRangeFromSema(properties) {
     const API_SALE_ENDPOINT = '/sema/site/receipts';
     const sheet = SpreadsheetApp.getActive().getSheetByName('AllSales');
-    const getSalesFromReceipts = function (receipts) {
-        const sales = [];
-
-        for (let rI = 0, rLen = receipts.length; rI < rLen; rI++) {
-            const receipt = receipts[rI];
-            const items = receipt.receipt_line_items;
-            for (var i = 0, len = items.length; i < len; i++) {
-                let item = items[i];
-                let sale = [
-                    receipt.kiosk.name,
-                    new Date(receipt.created_at).toDateString(),
-                    receipt.customer_account.id,
-                    receipt.customer_account.name,
-                    receipt.sales_channel.name,
-                    item.product.sku,
-                    (item.product.sku == "LOANPAYOFF") ? 0 : (parseFloat(item.quantity, 10)||0),
-                    (item.product.sku == "LOANPAYOFF") ? 0 : (parseFloat(item.quantity, 10) * item.product.unit_per_product)||0,
-                    (item.product.sku == "LOANPAYOFF") ? 0 : (parseFloat(item.price_total, 10)||0),
-                    (item.product.sku == "LOANPAYOFF") ? (-1 * parseFloat(receipt.amount_cash, 10)) : parseFloat(receipt.amount_loan, 10)
-                ];
-                sales.push(sale);
-
-            }
-        }
-        return sales.length ? sales : null;
-    }
 
     try {
         const receipts = _fetch('get', API_SALE_ENDPOINT, properties);
@@ -79,3 +53,33 @@ function loadSaleRangeFromSema(properties) {
     }
 }
 
+const getSalesFromReceipts = function (receipts) {
+  const sales = [];
+  
+//   receipts = reeceipts.map((receipt) => {
+  
+//   });
+  
+  for (let rI = 0, rLen = receipts.length; rI < rLen; rI++) {
+    const receipt = receipts[rI];
+    const items = receipt.receipt_line_items;
+    for (var i = 0, len = items.length; i < len; i++) {
+      let item = items[i];
+      let sale = [
+        receipt.kiosk.name,
+        new Date(receipt.created_at).toDateString(),
+        receipt.customer_account.id,
+        receipt.customer_account.name,
+        receipt.sales_channel.name,
+        item.product.sku,
+        (item.product.sku == "LOANPAYOFF") ? 0 : (parseFloat(item.quantity, 10)||0),
+        (item.product.sku == "LOANPAYOFF") ? 0 : (parseFloat(item.quantity, 10) * item.product.unit_per_product)||0,
+        (item.product.sku == "LOANPAYOFF") ? 0 : (parseFloat(item.price_total, 10)||0),
+        (item.product.sku == "LOANPAYOFF") ? (-1 * parseFloat(receipt.amount_cash, 10)) : parseFloat(receipt.amount_loan, 10)
+      ];
+      sales.push(sale);
+      
+    }
+  }
+  return sales.length ? sales : null;
+}
