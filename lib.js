@@ -13,7 +13,7 @@ function _createReceiptFromVentes(line) {
   var receipt = {};
 
   receipt.created_at = line.date
-  receipt.customer_id = line.customer_id;
+  receipt.customer_account_id = line.customer_account_id;
   receipt.amount_cash = parseFloat(line.cash, 10) || 0;
   receipt.amount_mobile = 0;
   receipt.amount_loan = parseFloat(line.credit, 10) || 0;
