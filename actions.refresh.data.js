@@ -5,7 +5,7 @@ function refreshData() {
     try {
         const properties = { ...DEFAULT_PROPERTIES, ..._getUserProperties() };
         loadSaleRangeFromSema(properties);
-        // loadExpenseRangeFromSema(properties);
+        loadExpenseRangeFromSema(properties);
     } catch (err) {
         _log(err.message);
         _toast(err.message);
@@ -14,6 +14,8 @@ function refreshData() {
 
 // Update expenses
 function loadExpenseRangeFromSema(properties) {
+    const sheet = SpreadsheetApp.getActive().getSheetByName('AllExpenses');
+
     let expenses = _fetch('GET', API_GET_EXPENSE_ENDPOINT, properties);
     // normalize expenses to expense line
     expenses = expenses.map(function (expense, ind, arr) {
@@ -24,16 +26,19 @@ function loadExpenseRangeFromSema(properties) {
     expenses.unshift(
         ["Kiosk", "Date", "Account #", "Total", "Description", "Category", "Sub Category"]
     );
-    const data = { sheetName: "AllExpenses", data: expenses };
-    jsonToSpreadsheet(data);
+    // TODO: Make use of `jsonToSpreadsheet` instead
+    var range = sheet.clear().getRange(1, 1, expenses.length, (expenses[0]).length);
+    // update sale range
+    range.setValues(expenses);
+    // toast success
+    _toast("Updated expenses data.");
 }
 
 // Update sales
 function loadSaleRangeFromSema(properties) {
-    const API_SALE_ENDPOINT = '/sema/site/receipts';
     const sheet = SpreadsheetApp.getActive().getSheetByName('AllSales');
 
-    const receipts = _fetch('get', API_SALE_ENDPOINT, properties);
+    const receipts = _fetch('get', API_GET_SALE_ENDPOINT, properties);
     // normalize from receipts to sale lines
     const sales = getSalesFromReceipts(receipts);
     // Add header to sales output
@@ -46,7 +51,7 @@ function loadSaleRangeFromSema(properties) {
     // update sale range
     range.setValues(sales);
     // toast success
-    _toast("Done");
+    _toast("Updated sales data.");
 }
 
 const getSalesFromReceipts = function (receipts) {
