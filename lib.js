@@ -46,14 +46,14 @@ function _createReceiptFromVentes(line) {
 function _createExpenseFromSorties(line) {
   var expense = {};
 
-  expense.created_at = line.date;
+  expense.created_at = line.created_at;
   expense.notes = line.notes;
   expense.total = line.total;
   expense.expense_account_id = line.expense_account_id;
-  expense.kiosk_id = KIOSK_ID;
+  expense.kiosk_id = line.kiosk_id;
   expense.user_id = USER_ID;
-  expense.uuid = line.expense_uuid;
-  // expense.line_number = line.line_number;
+  expense.uuid = line.uuid;
+  expense.line_number = line.line_number;
 
   return expense;
 }
