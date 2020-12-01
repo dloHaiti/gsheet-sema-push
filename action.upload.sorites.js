@@ -21,14 +21,14 @@ function uploadSortiesRange() {
     updatePosition({
       sheetName: "SORTIES",
       data: expense.uuid,
-      x: data[index].line_number,
+      x: expenses[index].line_number,
       y: 8
     });
     // update updated_at
     updatePosition({
       sheetName: "SORTIES",
       data: expense.updated_at,
-      x: data[index].line_number,
+      x: expenses[index].line_number,
       y: 9
     });
   });
