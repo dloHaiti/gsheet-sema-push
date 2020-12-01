@@ -11,7 +11,7 @@ function uploadSortiesRange() {
   const expenses = data.map((expense) => _createExpenseFromSorties(expense))
     // filter out empty data lines.
     .filter((expense) => {
-      return (expense.created_at ||	expense.notes ||	expense.total ||	expense.notes_2 ||	expense.expense_account_id ||	expense.kiosk_id);
+      return (expense.created_at ||	expense.notes ||	expense.total ||	expense.notes_2 ||	expense.expense_account_id);
     });
   // Upload receipts to sema
   var _expenses = _fetch("POST", API_POST_EXPENSE_ENDPOINT, expenses);
