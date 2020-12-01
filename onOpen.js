@@ -2,21 +2,27 @@
 // Create `SEMA` menu.
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
+  
+  
   // Add `SEMA` menu
   ui.createMenu('SEMA - push')
-    .addItem('Upload sale range', 'uploadSaleRange')
-    .addSeparator()
-    .addItem('Upload expense range', 'uploadSortiesRange')
-    .addItem('Set kiosks', 'uploadSortiesRange')
+    .addItem('1. Upload sale range', 'uploadSaleRange')
+    .addItem('2. Upload expense range', 'uploadSortiesRange')
     .addToUi();
+
+
+
 
   // Add `SEMA` menu
   ui.createMenu('SEMA -pull')
-  .addItem('Refresh data', 'refreshData')
+  .addItem('1. Refresh data', 'refreshData')
   .addSeparator()
   .addSubMenu(ui.createMenu('Configure')
-                  .addItem("Set kiosks.", 'setWhichKiosks')
-                  .addItem("Set date range.", 'setBetweenDate')
-                  .addItem("Reset to default settings.", 'resetProperty')) 
+                  .addItem("1.  Set kiosks.", 'setWhichKiosks')
+                  .addItem("2. Set date range.", 'setBetweenDate')
+                  .addItem("3. Reset to default settings.", 'resetProperty')) 
   .addToUi();
+  
+  
+  
 }
