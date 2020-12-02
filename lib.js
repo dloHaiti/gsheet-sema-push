@@ -27,6 +27,10 @@ const getSalesFromReceipts = function (receipts) {
           ]);
       });
   });
+  // Add header to sales output
+  sales.unshift([
+    "Kiosk", "Date", "Customer ID", "Customer Name", "Sales Channel", "SKU", "Qty", "Gallons", "Total", "Credit"
+  ]);
 
   return sales;
 }
