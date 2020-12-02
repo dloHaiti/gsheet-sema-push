@@ -53,25 +53,3 @@ function loadSaleRangeFromSema(properties) {
     // toast success
     _toast("Updated sales data.");
 }
-
-const getSalesFromReceipts = function (receipts) {
-  const sales = [];
-  receipts.forEach((receipt) => {
-      receipt.receipt_line_items.forEach((lineItem) => {
-          sales.push([
-              receipt.kiosk.name,
-              new Date(receipt.created_at).toDateString(),
-              receipt.customer_account.id,
-              receipt.customer_account.name,
-              receipt.sales_channel.name,
-              lineItem.product.sku,
-              (lineItem.product.sku == "LOANPAYOFF") ? 0 : (parseFloat(lineItem.quantity, 10)||0),
-              (lineItem.product.sku == "LOANPAYOFF") ? 0 : (parseFloat(lineItem.quantity, 10) * lineItem.product.unit_per_product)||0,
-              (lineItem.product.sku == "LOANPAYOFF") ? 0 : (parseFloat(lineItem.price_total, 10)||0),
-              (lineItem.product.sku == "LOANPAYOFF") ? (-1 * parseFloat(receipt.amount_cash, 10)) : parseFloat(receipt.amount_loan, 10)
-          ]);
-      });
-  });
-
-  return sales;
-}
