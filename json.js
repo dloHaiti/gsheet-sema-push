@@ -23,6 +23,8 @@ var spreadsheetToJson = function (options) {
         for (var j = 0, jLen = header.length; j < jLen; j++) {
             json[header[j]] = data[i][j];
         }
+        // Create and save reference of the dataline number this json.
+        json.line_number = rowBetween[0] + i;
         jsonArr.push(json);
     }
 
