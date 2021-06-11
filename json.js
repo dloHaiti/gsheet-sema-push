@@ -7,6 +7,8 @@ var spreadsheetToJson = function (options) {
         rowBetween = [0, 0],
         columnMax = COLUMN_MAX
     } = options;
+    rowBetween[0] = parseInt(rowBetween[0], 10);
+    rowBetween[1] = parseInt(rowBetween[1], 10);
 
     // Our working sheet
     var sheet = SpreadsheetApp.getActive().getSheetByName(sheetName);
